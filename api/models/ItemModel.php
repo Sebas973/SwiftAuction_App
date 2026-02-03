@@ -1,5 +1,5 @@
 <?php
-class MovieModel
+class ItemModel
 {
     //Conectarse a la BD
     public $enlace;
@@ -18,7 +18,7 @@ class MovieModel
         try {
             $imagenM=new ImageModel();
             //Consulta SQL
-            $vSQL = "SELECT * FROM movie order by title desc;";
+            $vSQL = "SELECT * FROM Item order by name desc;";
             //Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSQL);
             //Incluir imagenes
@@ -26,7 +26,7 @@ class MovieModel
                 for ($i=0; $i < count($vResultado); $i++) { 
                     $vResultado[$i]=$this->get($vResultado[$i]->id);
 
-                    //$vResultado[$i]->imagen=$imagenM->getImageMovie(($vResultado[$i]->id));
+                    //$vResultado[$i]->imagen=$imagenM->getImageItem(($vResultado[$i]->id));
                 }
             }
 
@@ -43,31 +43,24 @@ class MovieModel
      * @return $vresultado - Objeto pelicula
      */
     //
-    public function get($id)
+    public function get($idItem)
     {
         try {
-            $directorM=new DirectorModel();
-            $genreM=new GenreModel();
+            $categorieM=new CategorieModel();
             $actorM=new ActorModel();
             $imagenM=new ImageModel();
-            $vSql = "SELECT * FROM movie
-                    where id=$id;";
+            $vSql = "SELECT * FROM item
+                    where idItem=$idItem;";
 
             //Ejecutar la consulta sql
             $vResultado = $this->enlace->executeSQL($vSql);
             if(!empty($vResultado)){
                 $vResultado=$vResultado[0];
                 //Imagenes
-                $vResultado->imagen=$imagenM->getImageMovie(($vResultado->id));
-                //Director
-                $director=$directorM->get($vResultado->director_id);
-                $vResultado->director=$director;
-                //Generos --genres
-                $listaGeneros=$genreM->getGenreMovie($vResultado->id);
-                $vResultado->genres=$listaGeneros;
-                //Actores --actors
-                $listaActores=$actorM->getActorMovie($id);
-                $vResultado->actors=$listaActores;
+                $vResultado->imagen=$imagenM->getImageItem(($vResultado->idItem));
+                //Categories
+                $CategorieList=$categorieM->getCategorieItem($vResultado->idItem);
+                $vResultado->categories=$CategorieList;
             }
 
             
@@ -100,7 +93,7 @@ class MovieModel
             //Incluir imagenes
             if(!empty($vResultado) && is_array($vResultado)){
                 for ($i=0; $i < count($vResultado); $i++) { 
-                    $vResultado[$i]->imagen=$imagenM->getImageMovie(($vResultado[$i]->id));
+                    $vResultado[$i]->imagen=$imagenM->getImageItem(($vResultado[$i]->id));
                 }
             }
             //Retornar la respuesta

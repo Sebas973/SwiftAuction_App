@@ -26,18 +26,18 @@ class UserModel
 		}
 	}
 
-	public function get($id)
+	public function get($idUser)
 	{
 		try {
-			$rolM = new RolModel();
+			$rolM = new RoleModel();
 
 			//Consulta sql
-			$vSql = "SELECT * FROM user where id=$id";
+			$vSql = "SELECT * FROM user where idUser=$idUser";
 			//Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL($vSql);
 			if ($vResultado) {
 				$vResultado = $vResultado[0];
-				$rol = $rolM->getRolUser($id);
+				$rol = $rolM->getRoleUser($idUser);
 				$vResultado->rol = $rol;
 				// Retornar el objeto
 				return $vResultado;
@@ -124,7 +124,7 @@ class UserModel
 				$objeto->password = $crypt;
 			}
 			//Consulta sql            
-			$vSql = "Insert into user (name,email,password,rol_id)" .
+			$vSql = "Insert into user (name,email,password,idRole)" .
 				" Values ('$objeto->name','$objeto->email','$objeto->password',$objeto->rol_id)";
 
 			//Ejecutar la consulta

@@ -1,5 +1,5 @@
 <?php
-class RolModel{
+class RoleModel{
     public $enlace;
     public function __construct() {
         
@@ -9,7 +9,7 @@ class RolModel{
     public function all(){
         try {
             //Consulta sql
-			$vSql = "SELECT * FROM rol;";
+			$vSql = "SELECT * FROM Roles;";
 			
             //Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
@@ -24,7 +24,7 @@ class RolModel{
     public function get($id){
         try {
             //Consulta sql
-			$vSql = "SELECT * FROM rol where id=$id";
+			$vSql = "SELECT * FROM Roles where idRole=$id";
 			
             //Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
@@ -34,12 +34,12 @@ class RolModel{
 			die ( $e->getMessage () );
 		}
     }
-    public function getRolUser($idUser){
+    public function getRoleUser($idUser){
         try {
             //Consulta sql
 			$vSql = "SELECT r.id,r.name
             FROM rol r,user u 
-            where r.id=u.rol_id and u.id=$idUser";
+            where r.idRole=u.idRole and u.Role=$idUser";
 			
             //Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL ( $vSql);

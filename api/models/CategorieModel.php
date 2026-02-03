@@ -1,5 +1,5 @@
 <?php
-class GenreModel{
+class CategorieModel{
     public $enlace;
     public function __construct() {
         
@@ -9,7 +9,7 @@ class GenreModel{
     public function all(){
         try {
             //Consulta sql
-			$vSql = "SELECT * FROM genre;";
+			$vSql = "SELECT * FROM Categorie;";
 			
             //Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
@@ -24,7 +24,7 @@ class GenreModel{
     public function get($id){
         try {
             //Consulta sql
-			$vSql = "SELECT * FROM genre where id=$id";
+			$vSql = "SELECT * FROM Categorie where idCategorie=$id";
 			
             //Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
@@ -34,12 +34,12 @@ class GenreModel{
 			die ( $e->getMessage () );
 		}
     }
-    public function getGenreMovie($idMovie){
+    public function getCategorieItem($idItem){
         try {
             //Consulta sql
-			$vSql = "SELECT g.id,g.title 
-            FROM genre g,movie_genre mg 
-            where mg.genre_id=g.id and mg.movie_id=$idMovie";
+			$vSql = "SELECT c.idCategorie,c.name
+            FROM categorie c,item_categorie ic 
+            where ic.idCategorie=c.idCategorie and ic.idItem=$idItem";
 			
             //Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
@@ -49,13 +49,13 @@ class GenreModel{
 			die ( $e->getMessage () );
 		}
     }
-	public function getMoviesbyGenre($param){
+	public function getItembyCategorie($param){
         try {
 			$vResultado =null;
 			if(!empty($param )){
-				$vSql="SELECT m.id, m.lang, m.time, m.title, m.year
-				FROM movie_genre mg, movie m
-				where mg.movie_id=m.id and mg.genre_id=$param";
+				$vSql="SELECT i.idItem, i.name, i.description, i.status, i.condition, i.idUser, i.CreateDate
+				FROM Item_Categorie ic, item i
+				where ic.idItem=i.idItem and ic.idCategorie=$param";
 				$vResultado = $this->enlace->ExecuteSQL ( $vSql);
 			}
 			// Retornar el objeto
@@ -69,7 +69,7 @@ class GenreModel{
             //Consulta sql
             //Identificador autoincrementable
             
-			$vSql = "Insert into genre (title) Values ('$objeto->title')";
+			$vSql = "Insert into categorie (name) Values ('$objeto->name')";
 			
             //Ejecutar la consulta
 			$vResultado = $this->enlace->executeSQL_DML_last( $vSql);
@@ -82,7 +82,7 @@ class GenreModel{
     public function update($objeto) {
         try {
             //Consulta sql
-			$vSql = "Update genre SET title ='$objeto->title' Where id=$objeto->id";
+			$vSql = "Update genre SET name ='$objeto->name' Where idCategorie=$objeto->idCategorie";
 			
             //Ejecutar la consulta
 			$vResultado = $this->enlace->executeSQL_DML( $vSql);

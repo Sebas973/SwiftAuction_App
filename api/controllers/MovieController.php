@@ -8,7 +8,7 @@ class movie
         try {
             $response = new Response();
             //Instancia modelo
-            $movieM = new MovieModel;
+            $movieM = new ItemModel;
             //Método del modelo
             $result = $movieM->all();
             //Dar respuesta
@@ -23,7 +23,7 @@ class movie
         try {
             $response = new Response();
             //Instancia del modelo
-            $movie = new MovieModel();
+            $movie = new ItemModel();
             //Acción del modelo a ejecutar
             $result = $movie->get($id);
             //Dar respuesta
@@ -38,7 +38,7 @@ class movie
         try {
             $response = new Response();
             //Instancia del modelo
-            $movie = new MovieModel();
+            $movie = new ItemModel();
             //Acción del modelo a ejecutar
             $result = $movie->moviesByShopRental($idShopRental);
             //Dar respuesta
@@ -54,7 +54,7 @@ class movie
         try {
             $response = new Response();
             //Instancia del modelo
-            $movie = new MovieModel();
+            $movie = new ItemModel();
             //Acción del modelo a ejecutar
             $result = $movie->getCountByGenre($param);
             //Dar respuesta
@@ -72,7 +72,7 @@ class movie
             //Obtener json enviado
             $inputJSON = $request->getJSON();
             //Instancia del modelo
-            $movie = new MovieModel();
+            $movie = new ItemModel();
             //Acción del modelo a ejecutar
             $result = $movie->create($inputJSON);
             //Dar respuesta
@@ -90,7 +90,7 @@ class movie
             //Obtener json enviado
             $inputJSON = $request->getJSON();
             //Instancia del modelo
-            $movie = new MovieModel();
+            $movie = new ItemModel();
             //Acción del modelo a ejecutar
             $result = $movie->update($inputJSON);
             //Dar respuesta

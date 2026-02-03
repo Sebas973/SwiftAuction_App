@@ -6,7 +6,7 @@ class genre
         try {
             $response = new Response();
             //Obtener el listado del Modelo
-            $genero = new GenreModel();
+            $genero = new CategorieModel();
             $result = $genero->all();
             //Dar respuesta
             $response->toJSON($result);
@@ -18,7 +18,7 @@ class genre
     {
         try {
             $response = new Response();
-            $genero = new GenreModel();
+            $genero = new CategorieModel();
             $result = $genero->get($param);
             //Dar respuesta
             $response->toJSON($result);
@@ -26,24 +26,24 @@ class genre
             handleException($e);
         }
     }
-    public function getGenreMovie($id)
+    public function getCategorieItem($id)
     {
         try {
             $response = new Response();
-            $genero = new GenreModel();
-            $result = $genero->getGenreMovie($id);
+            $genero = new CategorieModel();
+            $result = $genero->getCategorieItem($id);
             //Dar respuesta
             $response->toJSON($result);
         } catch (Exception $e) {
             handleException($e);
         }
     }
-    public function getMoviesbyGenre($param)
+    public function getItemsbyCategorie($param)
     {
         try {
             $response = new Response();
-            $genero = new GenreModel();
-            $result = $genero->getMoviesbyGenre($param);
+            $genero = new CategorieModel();
+            $result = $genero->getItembyCategorie($param);
             //Dar respuesta
             $response->toJSON($result);
         } catch (Exception $e) {
