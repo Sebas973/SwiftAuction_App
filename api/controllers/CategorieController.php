@@ -1,5 +1,5 @@
 <?php
-class genre
+class categorie
 {
     public function index()
     {

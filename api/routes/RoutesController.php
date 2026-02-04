@@ -67,8 +67,11 @@ class RoutesController
                 http_response_code(200);
                 exit();
             }
-            $routesArray = explode("/", $_SERVER['REQUEST_URI']);
-            // Eliminar elementos vacíos del array
+            
+            $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+            $routesArray = explode("/", trim($path, "/"));
+
+            // Eliminar elementos vacíos del array  
             $routesArray = array_filter($routesArray);
 
             if (count($routesArray) < 2) {
