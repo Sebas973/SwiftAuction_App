@@ -3,6 +3,7 @@
 RewriteEngine On 
 # Si las siguientes condiciones son verdaderas, entonces 
 # se redirecciona a la URL:
+RewriteBase /SwiftAution_App/api
 # si el nombre de fichero solicitado no es un archivo que 
 # ya exista (podría existir a nivel de servidor)
 RewriteCond %{REQUEST_FILENAME} !-f
